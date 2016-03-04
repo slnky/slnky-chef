@@ -12,7 +12,6 @@ set :deploy_to, "#{ENV['DEPLOY_DIR']}/#{fetch(:application)}#{fetch(:stage) == '
 set :keep_releases, 5
 
 set :rvm_ruby_version, "#{rubyversion}@#{rubygemset}"      # Defaults to: 'default'
-# set :ssh_options, {forward_agent: true}
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
