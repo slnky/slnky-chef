@@ -6,6 +6,13 @@ Ridley::Logging.logger.level = Logger.const_get 'ERROR'
 module Slnky
   module Service
     class Chef < Base
+      def initialize(url)
+        super(url)
+        @chef_url = @config['chef']['url']
+        @chef_client = @config['chef']['client']
+        @chef_key = @config['chef']['key']
+      end
+
       def run
         subscribe 'aws.ec2.terminated' do |message|
           name = message.name
@@ -18,9 +25,9 @@ module Slnky
       def ridley
         @ridley ||= begin
           config = {
-              server_url: ENV['CHEF_URL'],
-              client_name: ENV['CHEF_CLIENT'],
-              client_key: ENV['CHEF_KEY'],
+              server_url: @chef_url,
+              client_name: @chef_client,
+              client_key: @chef_key,
               ssl: {
                   verify: false
               }

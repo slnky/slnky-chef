@@ -45,13 +45,6 @@ set :rvm_ruby_version, "#{rubyversion}@#{rubygemset}"      # Defaults to: 'defau
 
 namespace :deploy do
 
-  desc 'Push .env file'
-  task :dotenv do
-    on roles :app do
-      upload! '.env', "#{shared_path}/.env"
-    end
-  end
-
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
