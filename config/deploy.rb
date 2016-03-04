@@ -12,7 +12,7 @@ set :deploy_to, "#{ENV['DEPLOY_DIR']}/#{fetch(:application)}#{fetch(:stage) == '
 set :keep_releases, 5
 
 set :rvm_ruby_version, "#{rubyversion}@#{rubygemset}"      # Defaults to: 'default'
-
+# set :linked_files, fetch(:linked_files, []).push('.env')
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -44,6 +44,13 @@ set :rvm_ruby_version, "#{rubyversion}@#{rubygemset}"      # Defaults to: 'defau
 # set :keep_releases, 5
 
 namespace :deploy do
+
+  desc 'Push .env file'
+  task :dotenv do
+    on roles :app do
+      upload! '.env', "#{shared_path}/.env"
+    end
+  end
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
