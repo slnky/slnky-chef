@@ -6,8 +6,8 @@ Ridley::Logging.logger.level = Logger.const_get 'ERROR'
 module Slnky
   module Service
     class Chef < Base
-      def initialize(url)
-        super(url)
+      def initialize(url, env='development')
+        super(url, env)
         @chef_url = @config['chef']['url']
         @chef_client = @config['chef']['client']
         @chef_key = @config['chef']['key']
