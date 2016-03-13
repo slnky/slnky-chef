@@ -13,13 +13,11 @@ module Slnky
         @chef_key = @config['chef']['key']
       end
 
-      def run
-        subscribe 'aws.ec2.terminated' do |message|
-          name = message.name
-          data = message.payload
-          id = data.detail['instance-id']
-          remove_instance(id)
-        end
+      subscribe 'aws.ec2.terminated', :handle_terminated
+
+      def handle_terminated(name, data)
+        id = data.detail['instance-id']
+        remove_instance(id)
       end
 
       def ridley

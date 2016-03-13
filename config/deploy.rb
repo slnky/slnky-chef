@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'slnky-chef'
-set :repo_url, 'git@github.com:shawncatz/slnky-chef.git'
+set :repo_url, 'git@github.com:slnky/slnky-chef.git'
 
 rubyversion = File.read('.ruby-version').chomp
 rubygemset = File.read('.ruby-gemset').chomp
