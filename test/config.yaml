@@ -1,0 +1,14 @@
+---
+# config.yaml for Slnky::Service::Chef
+# this file is processed through ERB, you can inject
+# values into the config from the environment, by specifying them
+# in the .env file
+environment: development # should specify this
+service: chef # just an example
+chef:
+  url: <%= ENV["CHEF_URL"] %>
+  client: <%= ENV["CHEF_CLIENT"] %>
+  # getting multiline working sucked, a lot
+  # thank you black box that is rails
+  key: |
+<%= ENV["CHEF_KEY"].gsub(/^/, "      ") %>

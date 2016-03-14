@@ -9,4 +9,3 @@
 /tmp/
 .env
 deploy.env
-/test/config.yaml
