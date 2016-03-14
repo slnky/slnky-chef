@@ -8,6 +8,7 @@ module Slnky
     class Chef < Base
       def initialize(url, options={})
         super(url, options)
+        puts "ENV: #{@environment}"
         @chef_url = @config['chef']['url']
         @chef_client = @config['chef']['client']
         @chef_key = @config['chef']['key']
