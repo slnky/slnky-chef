@@ -13,3 +13,4 @@ gem 'aws-sdk'
 
 gem 'rspec'
 gem 'rake'
+gem 'ridley'

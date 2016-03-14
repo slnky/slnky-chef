@@ -8,9 +8,9 @@ module Slnky
     class Chef < Base
       def initialize(url, options={})
         super(url, options)
-        @chef_url = @config['chef']['url']
-        @chef_client = @config['chef']['client']
-        @chef_key = @config['chef']['key']
+        @chef_url = config.chef.url
+        @chef_client = config.chef.client
+        @chef_key = config.chef.key
       end
 
       subscribe 'aws.ec2.terminated', :handle_terminated
