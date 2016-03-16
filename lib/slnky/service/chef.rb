@@ -43,13 +43,13 @@ module Slnky
         node = ridley.node.find(name)
         client = ridley.client.find(name)
         if node
-          log :info, "remove node #{node.name}"
+          log :warn, "remove node #{node.name}"
           ridley.node.delete(name)
         else
           log :info, "node #{name} not found"
         end
         if client
-          log :info, "remove client #{node.name}"
+          log :warn, "remove client #{node.name}"
           ridley.client.delete(name)
         else
           log :info, "client #{name} not found"
