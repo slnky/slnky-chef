@@ -28,6 +28,11 @@ module Slnky
         end
       end
 
+      def handler(name, data)
+        # for example test
+        name == 'slnky.service.test' && data.hello == 'world!'
+      end
+
       def ridley
         @ridley ||= begin
           config = {
