@@ -8,12 +8,16 @@ module Slnky
 
       def echo(request, response)
         opts = options(request.args) do |slop|
-          slop.on "-h", "--help", "print help"
+          slop.banner = "usage: echo [options] ..."
+          slop.on "-h", "--help", "print help" do
+            return response.output slop.to_s
+          end
           slop.int "-x", "--times", "print x times", default: 1
         end
         args = opts.args
-        response.output opts.to_hash.inspect
-        response.output args.inspect
+        1.upto(opts[:times]) do |i|
+          response.output args.join(" ")
+        end
       rescue => e
         response.error "error: #{e.message} at #{e.backtrace.first}"
       end
