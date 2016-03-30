@@ -24,15 +24,11 @@ module Slnky
         1.upto(opts.times.to_i) do |i|
           response.output args.join(" ")
         end
-      rescue => e
-        response.error "#{__method__}: #{e.message} at #{e.backtrace.first}"
       end
 
       def handle_remove(request, response, opts)
         name = opts.NAME
         response.output name
-      rescue => e
-        response.error "#{__method__}: #{e.message} at #{e.backtrace.first}"
       end
 
       def help(request, response)
