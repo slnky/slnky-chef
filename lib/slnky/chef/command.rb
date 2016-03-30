@@ -7,9 +7,15 @@ module Slnky
       end
 
       def echo(request, response)
-        # pong
-        args = request.args
-        response.output = args.join(" ")
+        opts = options(request.args) do |slop|
+          slop.on "-h", "--help", "print help"
+          slop.int "-x", "--times", "print x times", default: 1
+        end
+        args = opts.args
+        response.output opts.to_hash.inspect
+        response.output args.inspect
+      rescue => e
+        response.error "error: #{e.message} at #{e.backtrace.first}"
       end
     end
   end
