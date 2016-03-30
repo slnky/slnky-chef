@@ -6,17 +6,11 @@ module Slnky
         @client ||= Slnky::Chef::Client.new(config)
       end
 
-      command :echo, "respond with the given arguments", <<-USAGE.strip_heredoc
+      command :echo, 'respond with the given arguments', <<-USAGE.strip_heredoc
         Usage: echo [options] ARGS...
 
         -h --help           print help.
         -x --times=TIMES    print x times [default: 1].
-      USAGE
-
-      command :remove, "remove node and client matching NAME", <<-USAGE.strip_heredoc
-        Usage: remove [options] NAME
-
-        -h --help           print help.
       USAGE
 
       def handle_echo(request, response, opts)
@@ -26,14 +20,15 @@ module Slnky
         end
       end
 
+      command :remove, 'remove node and client matching NAME', <<-USAGE.strip_heredoc
+        Usage: remove [options] NAME
+
+        -h --help           print help.
+      USAGE
+
       def handle_remove(request, response, opts)
         name = opts.NAME
         response.output name
-      end
-
-      def help(request, response)
-        response.output '  echo     just respond with the arguments given'
-        response.output '  remove   remove node and client matching NAME'
       end
     end
   end
