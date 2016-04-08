@@ -11,6 +11,7 @@ module Slnky
         @chef_url = config.chef.url
         @chef_client = config.chef.client
         @chef_key = config.chef.key
+        @failures = {}
       end
 
       subscribe 'aws.ec2.terminated', :handle_terminated
@@ -22,9 +23,17 @@ module Slnky
       end
 
       def handle_chef(name, data)
+        host = data.attributes ? "#{data.attributes.name}-#{data.attributes.cluster}" : ""
         if name == 'chef.run.failure'
-          name = data.attributes ? "#{data.attributes.name}-#{data.attributes.cluster}" : ""
-          log :error, "chef run failed on #{data.node} #{name}"
+          last = @failures[data.node]
+          @failures[data.node] = Time.now
+          return if last && (Time.now - last) < 24.hours
+          log :error, "chef run failed on #{data.node} #{host}"
+        elsif name == 'chef.run.success'
+          if @failures[data.node]
+            @failures[data.node] = false
+            log :warn, "chef run succeeded on #{data.node} #{host}"
+          end
         end
       end
 
