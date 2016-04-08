@@ -1,6 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'slnky'
-require 'slnky/chef'
+require 'json'
 require 'yaml'
 require 'erb'
 require 'tilt'
@@ -8,12 +7,15 @@ require 'tilt'
 require 'dotenv'
 @dotenv = Dotenv.load
 
+require 'slnky'
+require 'slnky/chef'
+
 def event(name)
   @events ||= {}
   @events[name] ||= begin
     file = File.expand_path("../../test/events/#{name}.json", __FILE__)
     raise "file #{file} not found" unless File.exists?(file)
-    Slnky::Data.new(JSON.parse(File.read(file)))
+    Slnky::Message.new(JSON.parse(File.read(file)))
   end
 end
 

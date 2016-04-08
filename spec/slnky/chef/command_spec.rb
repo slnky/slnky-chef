@@ -7,11 +7,11 @@ describe Slnky::Chef::Command do
     s
   end
   let(:echo) { command('echo').payload }
-  let(:response) { Slnky::Command::Response.new() }
+  let(:response) { Slnky::Command::Response.new("test", "test") }
 
   it 'handles echo' do
     resp = response
-    expect { subject.echo(echo, resp) }.to_not raise_error
+    expect { subject.handle_echo(echo, resp) }.to_not raise_error
     expect(resp.output).to eq("test echo")
   end
 end
