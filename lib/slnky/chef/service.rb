@@ -4,7 +4,7 @@ module Slnky
 
       attr_writer :client
       def client
-        @client ||= Slnky::Chef::Client.new(config)
+        @client ||= Slnky::Chef::Client.new
       end
 
       subscribe 'aws.ec2.terminated', :handle_terminated
