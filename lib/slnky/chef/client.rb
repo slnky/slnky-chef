@@ -4,27 +4,29 @@ Ridley::Logging.logger.level = Logger.const_get 'ERROR'
 module Slnky
   module Chef
     class Client
-      def initialize(config)
-        @url = config.chef.url
-        @client = config.chef.client
-        @key = config.chef.key
-        @env = config.environment
+      def initialize
+        @config = Slnky.config
+        @url = @config.chef.url
+        @client = @config.chef.client
+        @key = @config.chef.key
+        @env = @config.environment
+        @log = Slnky.log
       end
 
       def remove_instance(name)
         node = ridley.node.find(name)
         client = ridley.client.find(name)
         if node
-          log :warn, "remove node #{node.name}"
+          @log.warn "remove node #{node.name}"
           ridley.node.delete(name)
         else
-          log :info, "node #{name} not found"
+          @log.info "node #{name} not found"
         end
         if client
-          log :warn, "remove client #{node.name}"
+          @log.warn "remove client #{node.name}"
           ridley.client.delete(name)
         else
-          log :info, "client #{name} not found"
+          @log.info "client #{name} not found"
         end
       end
 

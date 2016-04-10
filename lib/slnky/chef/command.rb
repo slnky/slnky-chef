@@ -3,7 +3,7 @@ module Slnky
     class Command < Slnky::Command::Base
       attr_writer :client
       def client
-        @client ||= Slnky::Chef::Client.new(config)
+        @client ||= Slnky::Chef::Client.new
       end
 
       command :echo, 'respond with the given arguments', <<-USAGE.strip_heredoc
@@ -14,7 +14,7 @@ module Slnky
       USAGE
 
       def handle_echo(request, response, opts)
-        args = opts.ARGS
+        args = opts.args
         1.upto(opts.times.to_i) do |i|
           response.output args.join(" ")
         end
@@ -27,7 +27,8 @@ module Slnky
       USAGE
 
       def handle_remove(request, response, opts)
-        name = opts.NAME
+        name = opts.name
+        client.remove_instance(name)
         response.output name
       end
     end
