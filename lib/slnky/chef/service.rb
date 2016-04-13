@@ -1,6 +1,10 @@
 module Slnky
   module Chef
     class Service < Slnky::Service::Base
+      def initialize
+        super
+        @failures = {}
+      end
 
       attr_writer :client
       def client
