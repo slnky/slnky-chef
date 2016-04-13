@@ -1,0 +1,10 @@
+{
+  "name": "slnky.chef.command",
+  "payload": {
+    "command": "remove",
+    "args": [
+      "i-12345678"
+    ],
+    "responder": "STDOUT"
+  }
+}

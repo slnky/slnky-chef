@@ -13,3 +13,7 @@ namespace :travis do
     end
   end
 end
+
+task :run do
+  sh "slnky service run chef"
+end
