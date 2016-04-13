@@ -141,7 +141,7 @@ GEM
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
     semverse (1.2.1)
-    slnky (0.9.4)
+    slnky (0.9.5)
       activesupport (~> 4.2.5.1)
       amqp (~> 1.5.1)
       clamp (~> 1.0.0)
@@ -193,7 +193,7 @@ DEPENDENCIES
   rake
   ridley
   rspec
-  slnky (~> 0.9.4)
+  slnky (~> 0.9.5)
   travis
 
 BUNDLED WITH
