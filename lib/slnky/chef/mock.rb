@@ -11,6 +11,7 @@ module Slnky
       end
 
       def remove_instance(name)
+        @log.info name
         "remove #{name}"
       end
     end
