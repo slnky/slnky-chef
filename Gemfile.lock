@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/slnky/slnky-cli.git
-  revision: 9bb3480ad0de188274a01bc36f77354de82e21ca
+  revision: 1bb328626d796f924047e272fe98a9d3abe67db5
   branch: debug
   specs:
     slnky (0.9.6)
