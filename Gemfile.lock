@@ -1,5 +1,7 @@
-PATH
-  remote: /Users/shawn/slnky/slnky-cli
+GIT
+  remote: git://github.com/slnky/slnky-cli.git
+  revision: a4db6f87d33edd56a785922805321ecab52e286a
+  branch: master
   specs:
     slnky (0.9.6)
       activesupport (~> 4.2.5.1)
