@@ -25,11 +25,11 @@ module Slnky
           last = @failures[data.node]
           @failures[data.node] = Time.now
           return if last && (Time.now - last) < 24.hours
-          log :error, "chef run failed on #{data.node} #{host}"
+          log.error "chef run failed on #{data.node} #{host}"
         elsif name == 'chef.run.success'
           if @failures[data.node]
             @failures[data.node] = false
-            log :warn, "chef run succeeded on #{data.node} #{host}"
+            log.warn "chef run succeeded on #{data.node} #{host}"
           end
         end
       end

@@ -16,7 +16,7 @@ module Slnky
       def handle_echo(request, response, opts)
         args = opts.args
         1.upto(opts.times.to_i) do |i|
-          response.output args.join(" ")
+          log.info args.join(" ")
         end
       end
 
@@ -29,7 +29,6 @@ module Slnky
       def handle_remove(request, response, opts)
         name = opts.name
         client.remove_instance(name)
-        response.output name
       end
     end
   end

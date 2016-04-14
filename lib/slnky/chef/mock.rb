@@ -1,18 +1,16 @@
 module Slnky
   module Chef
-    class Mock
+    class Mock < Slnky::Chef::Client
       def initialize
-        @config = Slnky.config
-        @url = @config.chef.url
-        @client = @config.chef.client
-        @key = @config.chef.key
-        @env = @config.environment
-        @log = Slnky.log
+        @url = config.chef.url
+        @client = config.chef.client
+        @key = config.chef.key
+        @env = config.environment
       end
 
       def remove_instance(name)
-        @log.info name
-        "remove #{name}"
+        log.info name # to validate command/response
+        "remove #{name}" # to validate service/handler
       end
     end
   end

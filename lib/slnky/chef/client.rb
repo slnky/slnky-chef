@@ -1,32 +1,33 @@
 require 'ridley'
 Ridley::Logging.logger.level = Logger.const_get 'ERROR'
+require 'timeout'
 
 module Slnky
   module Chef
-    class Client
+    class Client < Slnky::Client::Base
       def initialize
-        @config = Slnky.config
-        @url = @config.chef.url
-        @client = @config.chef.client
-        @key = @config.chef.key
-        @env = @config.environment
-        @log = Slnky.log
+        @url = config.chef.url
+        @client = config.chef.client
+        @key = config.chef.key
+        @env = config.environment
       end
 
       def remove_instance(name)
-        node = ridley.node.find(name)
-        client = ridley.client.find(name)
-        if node
-          @log.warn "remove node #{node.name}"
-          ridley.node.delete(name)
-        else
-          @log.info "node #{name} not found"
-        end
-        if client
-          @log.warn "remove client #{node.name}"
-          ridley.client.delete(name)
-        else
-          @log.info "client #{name} not found"
+        Timeout.timeout(6) do
+          node = ridley.node.find(name)
+          client = ridley.client.find(name)
+          if node
+            log.warn "remove node #{node.name}"
+            ridley.node.delete(name)
+          else
+            log.info "node #{name} not found"
+          end
+          if client
+            log.warn "remove client #{node.name}"
+            ridley.client.delete(name)
+          else
+            log.info "client #{name} not found"
+          end
         end
       end
 
