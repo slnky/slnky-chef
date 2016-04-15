@@ -28,6 +28,7 @@ module Slnky
 
       def handle_remove(request, response, opts)
         name = opts.name
+        log.info "running client remove #{name}"
         client.remove_instance(name)
       end
     end
