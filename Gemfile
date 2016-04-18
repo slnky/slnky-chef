@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # gem 'slnky', '~> 0.10.2'
-gem 'slnky', github: 'slnky/slnky-cli', branch: 'master'
+gem 'slnky', path: "~/slnky-cli"
 gem 'daemons', '~> 1.2.3'
 gem 'dotenv', '~> 2.1.0'
 

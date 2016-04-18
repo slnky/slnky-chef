@@ -1,9 +1,7 @@
-GIT
-  remote: git://github.com/slnky/slnky-cli.git
-  revision: 3385b160e95fc2899f0e86ee4948044103a373ed
-  branch: master
+PATH
+  remote: ~/slnky-cli
   specs:
-    slnky (0.10.3)
+    slnky (0.10.0)
       activesupport (~> 4.2.5.1)
       amqp (~> 1.5.1)
       clamp (~> 1.0.0)
