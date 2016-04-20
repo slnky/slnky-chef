@@ -31,15 +31,6 @@ module Slnky
         log.info "running client remove #{name}"
         client.remove_instance(name)
       end
-
-      command :fuck, "go fuck yourself", <<-USAGE.strip_heredoc
-        Usage: fuck [options]
-
-        -h --help           print help
-      USAGE
-      def handle_fuck(request, response, opts)
-        log.info "go fuck yourself!"
-      end
     end
   end
 end

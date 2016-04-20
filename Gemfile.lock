@@ -48,6 +48,7 @@ GEM
       mixlib-config (~> 2.0)
       mixlib-shellout (~> 2.0)
     clamp (1.0.0)
+    colorize (0.7.7)
     daemons (1.2.3)
     diff-lcs (1.2.5)
     docopt (0.5.0)
@@ -141,10 +142,11 @@ GEM
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
     semverse (1.2.1)
-    slnky (0.11.0)
+    slnky (0.12.0)
       activesupport (~> 4.2.5.1)
       amqp (~> 1.5.1)
       clamp (~> 1.0.0)
+      colorize (~> 0.7.7)
       docopt (~> 0.5.0)
       dotenv (~> 2.1.0)
       eventmachine (~> 1.0.9.1)
@@ -193,7 +195,7 @@ DEPENDENCIES
   rake
   ridley
   rspec
-  slnky (~> 0.11.0)
+  slnky (~> 0.12.0)
   travis
 
 BUNDLED WITH
