@@ -13,10 +13,10 @@ describe Slnky::Chef::Command do
   let(:help_response) { slnky_response('test-route', 'spec') }
   let(:remove_response) { slnky_response('test-route', 'spec') }
 
-  it 'handles echo' do
-    expect { subject.handle(echo.name, echo.payload, echo_response) }.to_not raise_error
-    expect(echo_response.trace).to include("test echo")
-  end
+  # it 'handles echo' do
+  #   expect { subject.handle(echo.name, echo.payload, echo_response) }.to_not raise_error
+  #   expect(echo_response.trace).to include("test echo")
+  # end
 
   it 'handles help' do
     expect { subject.handle(help.name, help.payload, help_response) }.to_not raise_error
