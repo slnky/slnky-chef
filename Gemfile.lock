@@ -109,6 +109,7 @@ GEM
       json
       websocket (~> 1.0)
     rake (11.1.2)
+    redis (3.3.0)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -146,7 +147,7 @@ GEM
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
     semverse (1.2.1)
-    slnky (0.12.4)
+    slnky (0.13.0)
       activesupport (~> 4.2.5.1)
       amqp (~> 1.5.1)
       clamp (~> 1.0.0)
@@ -155,6 +156,7 @@ GEM
       dotenv (~> 2.1.0)
       eventmachine (~> 1.0.9.1)
       highline (~> 1.7.8)
+      redis (~> 3.2)
       rest-client (~> 1.8.0)
       tilt (~> 2.0.2)
     sshkit (1.9.0)
@@ -199,7 +201,7 @@ DEPENDENCIES
   rake
   ridley
   rspec
-  slnky (~> 0.12.4)
+  slnky (~> 0.13.0)
   travis
 
 BUNDLED WITH
