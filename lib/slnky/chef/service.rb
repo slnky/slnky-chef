@@ -7,6 +7,7 @@ module Slnky
       end
 
       attr_writer :client
+
       def client
         @client ||= Slnky::Chef::Client.new
       end
@@ -16,7 +17,10 @@ module Slnky
 
       def handle_terminated(name, data)
         id = data.detail['instance-id']
-        client.remove_instance(id)
+        if client.node(name) || client.client(name)
+          log.warn "removing chef node and client named '#{name}'"
+          client.remove_instance(id)
+        end
       end
 
       def handle_chef(name, data)

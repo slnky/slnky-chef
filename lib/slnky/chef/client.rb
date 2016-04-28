@@ -9,25 +9,24 @@ module Slnky
         @url = config.chef.url
         @client = config.chef.client
         @key = config.chef.key
+        @timeout = config.chef.timeout || 10
         @env = config.environment
       end
 
+      def client(name)
+        ridley.client.find(name)
+      end
+
+      def node(name)
+        ridley.node.find(name)
+      end
+
       def remove_instance(name)
-        Timeout.timeout(6) do
-          node = ridley.node.find(name)
-          client = ridley.client.find(name)
-          if node
-            log.warn "remove node #{node.name}"
-            ridley.node.delete(name)
-          else
-            log.info "node #{name} not found"
-          end
-          if client
-            log.warn "remove client #{node.name}"
-            ridley.client.delete(name)
-          else
-            log.info "client #{name} not found"
-          end
+        Timeout.timeout(@timeout) do
+          node = node(name)
+          client = client(name)
+          ridley.node.delete(name) if node
+          ridley.client.delete(name) if client
         end
       end
 

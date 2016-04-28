@@ -2,6 +2,7 @@ module Slnky
   module Chef
     class Command < Slnky::Command::Base
       attr_writer :client
+
       def client
         @client ||= Slnky::Chef::Client.new
       end
@@ -28,8 +29,10 @@ module Slnky
 
       def handle_remove(request, response, opts)
         name = opts.name
-        log.info "running client remove #{name}"
-        client.remove_instance(name)
+        if client.node(name) || client.client(name)
+          log.info "removing chef node and client named '#{name}'"
+          client.remove_instance(name)
+        end
       end
     end
   end
