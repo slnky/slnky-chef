@@ -32,6 +32,8 @@ module Slnky
         if client.node(name) || client.client(name)
           log.info "removing chef node and client named '#{name}'"
           client.remove_instance(name)
+        else
+          log.info "node and client '#{name}' doesn't exist"
         end
       end
     end
