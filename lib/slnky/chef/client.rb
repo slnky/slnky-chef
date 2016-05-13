@@ -13,20 +13,26 @@ module Slnky
         @env = config.environment
       end
 
-      def client(name)
-        ridley.client.find(name)
+      def client(id)
+        ridley.client.find(id)
       end
 
-      def node(name)
-        ridley.node.find(name)
+      def node(id)
+        ridley.node.find(id)
       end
 
-      def remove_instance(name)
+      def search_node(name)
+        ridley.search(:node, "hostname:*#{name}*").map do |e|
+          e.chef_attributes
+        end
+      end
+
+      def remove_instance(id)
         Timeout.timeout(@timeout) do
-          node = node(name)
-          client = client(name)
-          ridley.node.delete(name) if node
-          ridley.client.delete(name) if client
+          node = node(id)
+          client = client(id)
+          ridley.node.delete(id) if node
+          ridley.client.delete(id) if client
         end
       end
 

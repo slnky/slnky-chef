@@ -24,16 +24,35 @@ module Slnky
       command :remove, 'remove node and client matching NAME', <<-USAGE.strip_heredoc
         Usage: remove [options] NAME
 
+        NAME can be an instance id or short hostname (not fqdn)
         -h --help           print help.
       USAGE
 
       def handle_remove(request, response, opts)
         name = opts.name
-        if client.node(name) || client.client(name)
-          log.info "removing chef node and client named '#{name}'"
-          client.remove_instance(name)
+
+        # single instance id
+        if name =~ /^i-\d{8,12}$/
+          if client.client(name) || client.node(name)
+            log.info "removing chef node and client named '#{name}'"
+            client.remove_instance(name)
+          else
+            log.info "node and client '#{name}' doesn't exist"
+          end
+          return
+        end
+
+        # search nodes for name
+        list = client.search_node(name)
+        if list.count == 0
+          log.info "no nodes matching name: '#{name}'"
+        elsif list.count > 1
+          log.info "#{list.count} nodes found: #{list.map { |e| e.id }.join(',')}"
         else
-          log.info "node and client '#{name}' doesn't exist"
+          # single element in list
+          id = list.first.chef_id
+          log.info "removing chef node and client named '#{id}'"
+          # client.remove_instance(name)
         end
       end
     end

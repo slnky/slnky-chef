@@ -2,6 +2,9 @@ require 'rspec/core/rake_task'
 require 'dotenv'
 Dotenv.load
 RSpec::Core::RakeTask.new(:spec)
+RSpec::Core::RakeTask.new('spec:remote') do |t|
+  t.rspec_opts = '--tag remote'
+end
 task :default => :spec
 
 namespace :travis do

@@ -18,13 +18,17 @@ describe Slnky::Chef::Command do
   #   expect(echo_response.trace).to include("test echo")
   # end
 
-  it 'handles help' do
-    expect { subject.handle(help.name, help.payload, help_response) }.to_not raise_error
-    expect(help_response.trace).to include("chef help: print help")
+  context '#help' do
+    it 'handles help' do
+      expect { subject.handle(help.name, help.payload, help_response) }.to_not raise_error
+      expect(help_response.trace).to include("chef help: print help")
+    end
   end
 
-  it 'handles remove' do
-    expect { subject.handle(remove.name, remove.payload, remove_response) }.to_not raise_error
-    expect(remove_response.trace).to include("i-12345678")
+  context '#remove' do
+    it 'handles remove' do
+      expect { subject.handle(remove.name, remove.payload, remove_response) }.to_not raise_error
+      expect(remove_response.trace).to include("node and client 'i-12345678' doesn't exist")
+    end
   end
 end
