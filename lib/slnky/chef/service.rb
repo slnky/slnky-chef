@@ -17,9 +17,11 @@ module Slnky
 
       def handle_terminated(name, data)
         id = data.detail['instance-id']
-        if client.node(name) || client.client(name)
-          log.warn "removing chef node and client named '#{name}'"
+        if client.node(id) || client.client(id)
+          log.warn "removing chef node and client named '#{id}'"
           client.remove_instance(id)
+        else
+          log.info "could not find node or client '#{id}'"
         end
       end
 
