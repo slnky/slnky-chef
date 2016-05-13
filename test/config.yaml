@@ -5,6 +5,11 @@
 # in the .env file
 environment: test # should specify this
 service: chef # just an example
+aws:
+  key: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  secret: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+  region: <%= ENV['AWS_REGION'] %>
+  zones: <%= ENV['AWS_HOSTED_ZONES'] %>
 chef:
   url: <%= ENV["CHEF_URL"] %>
   client: <%= ENV["CHEF_CLIENT"] %>

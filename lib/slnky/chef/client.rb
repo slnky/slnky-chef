@@ -38,15 +38,14 @@ module Slnky
       end
 
       def cleanup
-        aws              = Aws::EC2::Resource.new
-        nodes            = ridley.node.all
-        instances        = aws.instances(filters:[{name: 'instance-state-name', values: ['running']}])
-        chef_node_ids    = nodes.map{|c| c.chef_id}
-        aws_node_ids     = instances.map{|i| i.instance_id}
+        nodes = ridley.node.all
+        instances = ec2.instances(filters: [{name: 'instance-state-name', values: ['running']}])
+        chef_node_ids = nodes.map { |c| c.chef_id }
+        aws_node_ids = instances.map { |i| i.instance_id }
         terminated_nodes = chef_node_ids - aws_node_ids
 
         terminated_nodes.each do |id|
-          remove_instance(id) if config.environment == 'production'
+          remove_instance(id) if @env == 'production'
         end
       end
 
@@ -63,6 +62,17 @@ module Slnky
               }
           }
           Ridley.new(config)
+        end
+      end
+
+      def ec2
+        @ec2 ||= begin
+          cfg = {
+              region: config.aws.region,
+              credentials: Aws::Credentials.new(config.aws.key, config.aws.secret)
+          }
+          Aws.config.update(cfg)
+          Aws::EC2::Resource.new
         end
       end
     end
