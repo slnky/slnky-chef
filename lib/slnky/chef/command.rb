@@ -30,7 +30,7 @@ module Slnky
       def handle_cleanup(request, response, opts)
         log.info 'cleaning up orphan clients and nodes'
         list = client.cleanup
-        log.warn "cleaned up #{list.count} nodes and clients"
+        log.info "cleaned up #{list.count} nodes and clients"
         list
       end
 
