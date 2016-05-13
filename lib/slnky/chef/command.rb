@@ -21,6 +21,17 @@ module Slnky
       #   end
       # end
 
+      command :cleanup, 'clean up orphan clients and nodes', <<-USAGE.strip_heredoc
+        Usage: cleanup [options]
+
+        -h --help           print help.
+      USAGE
+
+      def handle_cleanup(request, response, opts)
+        log.info 'cleaning up orphan clients and nodes'
+        client.cleanup
+      end
+
       command :remove, 'remove node and client matching NAME', <<-USAGE.strip_heredoc
         Usage: remove [options] NAME
 

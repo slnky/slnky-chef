@@ -1,0 +1,9 @@
+{
+  "name": "slnky.chef.command",
+  "payload": {
+    "command": "cleanup",
+    "args": [
+    ],
+    "responder": "STDOUT"
+  }
+}

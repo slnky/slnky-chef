@@ -9,9 +9,11 @@ describe Slnky::Chef::Command do
   let(:echo) { slnky_command('echo') }
   let(:help) { slnky_command('help') }
   let(:remove) { slnky_command('remove') }
+  let(:cleanup) { slnky_command('cleanup') }
   let(:echo_response) { slnky_response('test-route', 'spec') }
   let(:help_response) { slnky_response('test-route', 'spec') }
   let(:remove_response) { slnky_response('test-route', 'spec') }
+  let(:cleanup_response) { slnky_response('test-route', 'spec') }
 
   # it 'handles echo' do
   #   expect { subject.handle(echo.name, echo.payload, echo_response) }.to_not raise_error
@@ -29,6 +31,13 @@ describe Slnky::Chef::Command do
     it 'handles remove' do
       expect { subject.handle(remove.name, remove.payload, remove_response) }.to_not raise_error
       expect(remove_response.trace).to include("node and client 'i-12345678' doesn't exist")
+    end
+  end
+
+  context '#cleanup' do
+    it 'handles cleanup' do
+      expect { subject.handle(cleanup.name, cleanup.payload, cleanup_response) }.to_not raise_error
+      expect(cleanup_response.trace).to include("removed 1 node")
     end
   end
 end

@@ -27,6 +27,12 @@ describe Slnky::Chef::Client, remote: true do
     end
   end
 
+  context '#cleanup' do
+    it 'handles removing orphan instances' do
+      expect { subject.cleanup }.not_to raise_error
+    end
+  end
+
   # subject do
   #   s = described_class.new
   #   s.client = Slnky::Chef::Mock.new

@@ -1,6 +1,7 @@
 require 'ridley'
 Ridley::Logging.logger.level = Logger.const_get 'ERROR'
 require 'timeout'
+require 'aws-sdk'
 
 module Slnky
   module Chef
@@ -33,6 +34,19 @@ module Slnky
           client = client(id)
           ridley.node.delete(id) if node
           ridley.client.delete(id) if client
+        end
+      end
+
+      def cleanup
+        aws              = Aws::EC2::Resource.new
+        nodes            = ridley.node.all
+        instances        = aws.instances(filters:[{name: 'instance-state-name', values: ['running']}])
+        chef_node_ids    = nodes.map{|c| c.chef_id}
+        aws_node_ids     = instances.map{|i| i.instance_id}
+        terminated_nodes = chef_node_ids - aws_node_ids
+
+        terminated_nodes.each do |id|
+          remove_instance(id) if config.environment == 'production'
         end
       end
 

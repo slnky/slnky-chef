@@ -20,6 +20,11 @@ module Slnky
         []
       end
 
+      def cleanup
+        log.info 'removed 1 node' # to validate command/response
+        'removed 1 node' # to validate service/handler
+      end
+
       def remove_instance(name)
         log.info name # to validate command/response
         "remove #{name}" # to validate service/handler
